@@ -5,13 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Dependencies
-        run: sudo apt-get update && sudo apt-get install -y clang lld
       - name: Compile Payload
         run: |
+          sudo apt-get update && sudo apt-get install -y clang lld
+          # استخدام مسارات نسبية بناءً على موقع المشروع الحالي
           cd power_control
-          make clean
-          make
+          clang -target x86_64-scei-ps4-elf -I../ps5-payload-sdk/target/include -fPIC -ffreestanding -nostdinc -c -o main.o main.c
+          ld.lld -flavor gnu -T ../ps5-payload-sdk/ldscripts/elf_x86_64.x -o Control_power_ps5.elf main.o
       - name: Upload Output
         uses: actions/upload-artifact@v4
         with:
