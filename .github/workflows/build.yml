@@ -6,17 +6,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Prepare Local Paths
-        run: |
-          # إنشاء المجلد في المسار الذي يتوقعه Makefile
-          mkdir -p ../ps5-payload-sdk
-          # نسخ محتويات المكتبة إلى هذا المسار
-          cp -r ps5-payload-sdk/* ../ps5-payload-sdk/
-          sudo apt-get update && sudo apt-get install -y clang lld
-
       - name: Compile
         run: |
+          sudo apt-get update && sudo apt-get install -y clang lld
+          # الانتقال إلى المجلد الذي يحتوي على الكود المصدري
           cd power_control
+          # تعريف مسار SDK ليكون داخل المستودع الحالي
+          export PS5_PAYLOAD_SDK=$GITHUB_WORKSPACE/ps5-payload-sdk
           make clean
           make
 
