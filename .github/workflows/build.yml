@@ -16,4 +16,3 @@ jobs:
         with:
           name: Payload
           path: power_control/*.elf
-
