@@ -6,14 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install PS5 Payload SDK
-        run: |
-          cd ..
-          git clone https://github.com/ps5-payload-sdk/ps5-payload-sdk.git
-
       - name: Compile
         run: |
           sudo apt-get update && sudo apt-get install -y clang lld
+          export PS5_PAYLOAD_SDK=$(pwd)/ps5-payload-sdk
           cd power_control
           make clean
           make
