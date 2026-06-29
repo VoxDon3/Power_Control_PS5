@@ -1,0 +1,19 @@
+name: Build PS5 Payload
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y clang lld
+      - name: Compile Payload
+        run: |
+          cd power_control
+          make clean
+          make
+      - name: Upload Output
+        uses: actions/upload-artifact@v3
+        with:
+          name: PS5_Payload_Final
+          path: power_control/*.elf
