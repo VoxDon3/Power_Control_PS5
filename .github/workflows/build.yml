@@ -5,23 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Create Symbolic Link
-        run: |
-          # ننشئ الرابط في المجلد "الأب" للمشروع ليتطابق مع طلب main.c
-          mkdir -p ../ps5-payload-sdk
-          # الرابط يربط المجلد الموجود في المستودع بالمسار الذي يبحث عنه الكود
-          ln -s $GITHUB_WORKSPACE/ps5-payload-sdk/include ../ps5-payload-sdk/include
-          sudo apt-get update && sudo apt-get install -y clang lld
-
       - name: Compile
         run: |
+          sudo apt-get update && sudo apt-get install -y clang lld
           cd power_control
           make clean
           make
-
-      - name: Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: Payload
-          path: power_control/*.elf
