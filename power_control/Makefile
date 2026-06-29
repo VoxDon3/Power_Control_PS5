@@ -1,11 +1,10 @@
 SDK_ROOT = ../ps5-payload-sdk
 SDK_TARGET = $(SDK_ROOT)/target
 SDK_LDSCRIPTS = $(SDK_ROOT)/ldscripts
-SDK_LIBC = $(SDK_ROOT)/libc
 
 CC = clang
 
-CFLAGS = -target x86_64-scei-ps4-elf -I$(SDK_TARGET)/include -I$(SDK_LIBC)/include -fPIC -ffreestanding -nostdinc -O2
+CFLAGS = -target x86_64-scei-ps4-elf -I$(SDK_TARGET)/include -fPIC -ffreestanding -nostdinc -O2
 LDFLAGS = -target x86_64-scei-ps4-elf -T $(SDK_LDSCRIPTS)/elf_x86_64.x -nostdlib
 
 all: Control_power_ps5.elf
