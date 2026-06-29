@@ -6,16 +6,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Dependencies
+      - name: Prepare SDK Path
         run: |
+          # نقل المكتبة للمستوى الأعلى ليراها المترجم في المسار المتوقع
+          mv ps5-payload-sdk ../
           sudo apt-get update && sudo apt-get install -y clang lld
 
       - name: Compile
         run: |
-          # تأكد أن المسار هو المسار الصحيح للمجلد الذي يحتوي على Makefile
           cd power_control
-          # تعريف مسار المكتبات لتكون متاحة للمترجم
-          export PS5_PAYLOAD_SDK=$(pwd)/../ps5-payload-sdk
           make clean
           make
 
