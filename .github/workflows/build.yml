@@ -6,12 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup SDK Link
+      - name: Fix Directory Structure
         run: |
-          # إنشاء مجلد "أب" وهمي ليرى المترجم المسار الذي يتوقعه
-          mkdir -p ../ps5-payload-sdk
-          # إنشاء رابط رمزي يربط المجلد الفعلي بالمسار المتوقع
-          ln -s $GITHUB_WORKSPACE/ps5-payload-sdk/include ../ps5-payload-sdk/include
+          # نقل المجلد ليكون في المسار الذي يتوقعه main.c
+          mv ps5-payload-sdk ../
           sudo apt-get update && sudo apt-get install -y clang lld
 
       - name: Compile
