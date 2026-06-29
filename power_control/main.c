@@ -1,5 +1,6 @@
-#include "../ps5-payload-sdk/include/network.h"
-#include "../ps5-payload-sdk/include/kernel.h"
+#include "../include/network.h"
+#include "../include/kernel.h"
+
 
 
 int main() {
